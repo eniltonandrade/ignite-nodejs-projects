@@ -9,10 +9,10 @@ GymPass style app.
 - [x] Should be able to get logged user profile;
 - [x] Should be able to get number of check-ins done by the logged user;
 - [x] Should be able to get the history of check-ins;
-- [ ] Should be able to search for nearby gyms;
-- [ ] Should be able to search a gym by its name;
+- [x] Should be able to search for nearby gyms;
+- [x] Should be able to search a gym by its name;
 - [x] Should be able to check into a gym;
-- [ ] Should be able to validate user's check in;
+- [x] Should be able to validate user's check in;
 - [x] Should be able to register a new gym;
 
 ## BSs (Business Rules)
@@ -20,7 +20,7 @@ GymPass style app.
 - [x] User shouldn't be able to register with an existent registered email;
 - [x] User can't do two check-ins at same day;
 - [x] User can't do the check-in if not in 100m away from the gym;
-- [ ] Check-in can only be validated after 20 minutes after creation;
+- [x] Check-in can only be validated after 20 minutes after creation;
 - [ ] Check-in can only be validated by admins;
 - [ ] Gym can only be registered by admins;
 
