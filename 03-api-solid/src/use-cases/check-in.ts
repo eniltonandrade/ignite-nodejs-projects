@@ -45,7 +45,6 @@ export class CheckInsUseCase {
     )
 
     if (distance > MAX_DISTANCE_IN_KILOMETERS) {
-      console.log(distance)
       throw new MaxDistanceError()
     }
 
