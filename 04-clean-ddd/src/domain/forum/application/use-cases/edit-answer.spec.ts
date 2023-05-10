@@ -1,18 +1,18 @@
-import { DeleteAnswerUseCase } from './delete-answer'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { makeAnswer } from 'test/factories/make-answer'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
+import { makeAnswer } from 'test/factories/make-answer'
+import { EditAnswerUseCase } from './edit-answer'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 let inMemoryAnswerRepository: InMemoryAnswersRepository
-let sut: DeleteAnswerUseCase
+let sut: EditAnswerUseCase
 
-describe('Delete Answer', () => {
+describe('Edit Answer', () => {
   beforeEach(() => {
     inMemoryAnswerRepository = new InMemoryAnswersRepository()
-    sut = new DeleteAnswerUseCase(inMemoryAnswerRepository)
+    sut = new EditAnswerUseCase(inMemoryAnswerRepository)
   })
 
-  it('should be able to delete a answer', async () => {
+  it('should be able to edit a answer', async () => {
     const newAnswer = makeAnswer(
       {
         authorId: new UniqueEntityID('author-1'),
@@ -23,14 +23,17 @@ describe('Delete Answer', () => {
     await inMemoryAnswerRepository.create(newAnswer)
 
     await sut.execute({
-      answerId: 'answer-1',
+      answerId: newAnswer.id.toValue(),
       authorId: 'author-1',
+      content: 'Edited Answer',
     })
 
-    expect(inMemoryAnswerRepository.items).toHaveLength(0)
+    expect(inMemoryAnswerRepository.items[0]).toMatchObject({
+      content: 'Edited Answer',
+    })
   })
 
-  it('should not be able to delete a answer from another user', async () => {
+  it('should not be able to edit a answer from another user', async () => {
     const newAnswer = makeAnswer(
       {
         authorId: new UniqueEntityID('author-1'),
@@ -42,8 +45,9 @@ describe('Delete Answer', () => {
 
     await expect(() =>
       sut.execute({
-        answerId: 'answer-1',
+        answerId: newAnswer.id.toValue(),
         authorId: 'author-2',
+        content: 'New Content',
       }),
     ).rejects.toBeInstanceOf(Error)
   })

@@ -1,12 +1,12 @@
 import { AnswerQuestionUseCase } from './answer-question'
-import { InMemorAnswersRepository } from 'test/repositories/in-memory-answers-repository'
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 
-let inMemoryAnswerRepository: InMemorAnswersRepository
+let inMemoryAnswerRepository: InMemoryAnswersRepository
 let sut: AnswerQuestionUseCase
 
 describe('Create Answer', () => {
   beforeEach(() => {
-    inMemoryAnswerRepository = new InMemorAnswersRepository()
+    inMemoryAnswerRepository = new InMemoryAnswersRepository()
     sut = new AnswerQuestionUseCase(inMemoryAnswerRepository)
   })
 
